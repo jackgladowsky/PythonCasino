@@ -59,10 +59,18 @@ class HiLo:
         gameLoop = True
         currentCard = self.deck.deal()
         nextCard = self.deck.deal()
+        userWinnings = 0
         
         print('Welcome to HiLo.')
+        print('The game will display the current card and you have to guess if the next card will be higher or lower.')
+        print('Your winnings will double every time you get one right.')
+        print('You can try and keep guessing correctly, but one wrong and you lose everything.')
+        print('------------------------------')
         print('How much would you like to bet?')
         userBet = int(input('Enter bet: '))
+        print('------------------------------')
+        
+        userWinnings = userBet
         
         while gameLoop:
             
@@ -79,11 +87,11 @@ class HiLo:
                     self.player.balance -= userBet
                 else:
                     print(f'Correct. The next card was a {nextCard}.')
-                    self.player.balance += userBet
+                    userWinnings = userWinnings * 2
             elif userChoice == 'l':
                 if values[currentCard] > values[nextCard]:
                     print(f'Correct. The next card was a {nextCard}.')
-                    self.player.balance += userBet
+                    userWinnings = userWinnings * 2
                 else:
                     print(f'Wrong. The next card was a {nextCard}.')
                     self.player.balance -= userBet
@@ -92,7 +100,13 @@ class HiLo:
             print('------------------------------')
             
             self.player.writeBalance()
-            print(f'Your current balance is {self.player.balance}.')
+            print(f'Your current winnings are {userWinnings}.')
+            print('If you would like to keep playing click y. If you want to cash out click l.')
+            userChoice2 = input('Enter here: ')
+            if userChoice2 == 'l':
+                self.player.balance += userWinnings
+                gameLoop = False
+            
             print('------------------------------')
             currentCard = nextCard
             self.deck.checkIfEmpty()
@@ -121,7 +135,7 @@ def main():
     gameLoop = True
     
     while gameLoop:
-        print('Please choose from the available games below:')
+        print('Please choose from the available games below or type b to view your balance:')
         print('1. Blackjack')
         print('2. Roulette')
         print('3. Hi/Lo')
@@ -147,6 +161,8 @@ def main():
             print('Leaving Casino.')
             print('------------------------------')
             gameLoop = False
+        elif playerGameChoice == 'b':
+            print(f'Your balance is {player.balance}.')
         else:
             print('Choose a valid selection.')
             print('------------------------------')
