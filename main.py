@@ -49,6 +49,10 @@ class Deck:
         
         
 class HiLo:
+    values['Jack'] = 11
+    values['Queen'] = 12
+    values['King'] = 13
+    values['Ace'] = 14
     
     def __init__(self, player, deck):
         self.player = player
@@ -70,44 +74,54 @@ class HiLo:
         userBet = int(input('Enter bet: '))
         print('------------------------------')
         
-        userWinnings = userBet
+        userWinnings = 0
+        USERBET = userBet
         
         while gameLoop:
+            # take away bet from balance from loss
+            # doesnt work if current card and next card are face cards
             
             print(f'The current card is a {currentCard}.')
-            print('Do you think the next card will be higher or lower? Press e to exit. (h/l/e)')
+            print('Do you think the next card will be higher or lower? Press e to exit with winnings. (h/l/e)')
             userChoice = input('Enter here: ')
             print('------------------------------')
             
             if userChoice == 'e':
+                self.player.balance += userWinnings
+                self.player.writeBalance()
                 gameLoop = False
             elif userChoice == 'h':
                 if values[currentCard] > values[nextCard]:
                     print(f'Wrong. The next card was a {nextCard}.')
-                    self.player.balance -= userBet
+                    print(f'You lost {USERBET}.')
+                    print('------------------------------')
+                    self.player.balance -= USERBET
+                    self.player.writeBalance()
+                    gameLoop = False
                 else:
                     print(f'Correct. The next card was a {nextCard}.')
-                    userWinnings = userWinnings * 2
+                    userWinnings += userBet
+                    userBet += userBet
+                    print(f'Your current winnings are {userWinnings}.')
+                    print('------------------------------')
             elif userChoice == 'l':
                 if values[currentCard] > values[nextCard]:
                     print(f'Correct. The next card was a {nextCard}.')
-                    userWinnings = userWinnings * 2
+                    userWinnings += userBet
+                    userBet += userBet
+                    print(f'Your current winnings are {userWinnings}.')
+                    print('------------------------------')
                 else:
                     print(f'Wrong. The next card was a {nextCard}.')
-                    self.player.balance -= userBet
+                    print(f'You lost {USERBET}.')
+                    print('------------------------------')
+                    self.player.balance -= USERBET
+                    self.player.writeBalance()
+                    gameLoop = False
             else:
                 print('Enter a valid choice (h/l/e)')
-            print('------------------------------')
+                print('------------------------------')
             
-            self.player.writeBalance()
-            print(f'Your current winnings are {userWinnings}.')
-            print('If you would like to keep playing click y. If you want to cash out click l.')
-            userChoice2 = input('Enter here: ')
-            if userChoice2 == 'l':
-                self.player.balance += userWinnings
-                gameLoop = False
-            
-            print('------------------------------')
             currentCard = nextCard
             self.deck.checkIfEmpty()
             nextCard = self.deck.deal()
@@ -163,6 +177,7 @@ def main():
             gameLoop = False
         elif playerGameChoice == 'b':
             print(f'Your balance is {player.balance}.')
+            print('------------------------------')
         else:
             print('Choose a valid selection.')
             print('------------------------------')
