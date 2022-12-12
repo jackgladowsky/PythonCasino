@@ -1,10 +1,5 @@
 import random
 
-suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
-ranks = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
-values = {'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5, 'Six': 6, 'Seven': 7, 'Eight': 8, 'Nine': 9, 'Ten': 10, 'Jack': 10, 'Queen': 10, 'King': 10, 'Ace': 11}
-
-
 class Player:
     writeCount = 0
     def __init__(self, name='Unknown'):
@@ -31,8 +26,9 @@ class Player:
         self.writeCount += 1
             
 class Deck:
-    def __init__(self):
-        self.deck = [card for card in values]
+    def __init__(self, values):
+        self.values = values
+        self.deck = [card for card in self.values]
         
     def shuffle(self):
         random.shuffle(self.deck)    
@@ -42,23 +38,23 @@ class Deck:
     
     def checkIfEmpty(self):
         if len(self.deck) == 0:
-            self.deck = [card for card in values]
+            self.deck = [card for card in self.values]
             random.shuffle(self.deck)
             print('Shuffling Deck...')
             print('------------------------------')
         
         
-class HiLo:
-    values['Jack'] = 11
-    values['Queen'] = 12
-    values['King'] = 13
-    values['Ace'] = 14
-    
-    def __init__(self, player, deck):
+class HiLo:    
+    def __init__(self, player):
         self.player = player
-        self.deck = deck
+        self.suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+        self.ranks = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+        self.values = {'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5, 'Six': 6, 'Seven': 7, 'Eight': 8, 'Nine': 9, 'Ten': 10, 'Jack': 11, 'Queen': 12, 'King': 13, 'Ace': 14}
+        self.deck = Deck(self.values)
         
     def playHiLo(self):
+        self.deck.shuffle()
+        self.deck.checkIfEmpty()
 
         gameLoop = True
         currentCard = self.deck.deal()
@@ -78,6 +74,7 @@ class HiLo:
         USERBET = userBet
         
         while gameLoop:
+            
             # take away bet from balance from loss
             # doesnt work if current card and next card are face cards
             
@@ -91,7 +88,7 @@ class HiLo:
                 self.player.writeBalance()
                 gameLoop = False
             elif userChoice == 'h':
-                if values[currentCard] > values[nextCard]:
+                if self.values[currentCard] > self.values[nextCard]:
                     print(f'Wrong. The next card was a {nextCard}.')
                     print(f'You lost {USERBET}.')
                     print('------------------------------')
@@ -105,7 +102,7 @@ class HiLo:
                     print(f'Your current winnings are {userWinnings}.')
                     print('------------------------------')
             elif userChoice == 'l':
-                if values[currentCard] > values[nextCard]:
+                if self.values[currentCard] > self.values[nextCard]:
                     print(f'Correct. The next card was a {nextCard}.')
                     userWinnings += userBet
                     userBet += userBet
@@ -138,9 +135,7 @@ def main():
     
     player = Player(playerName)
     player.writeBalance()
-    deck = Deck()
-    deck.shuffle()
-    hilo = HiLo(player, deck)
+    hilo = HiLo(player)
     
     
     print(f'Welcome {player.name}! Your current balance is {player.balance}.')
