@@ -75,8 +75,9 @@ class HiLo:
         
         while gameLoop:
             
-            # take away bet from balance from loss
-            # doesnt work if current card and next card are face cards
+            # TODO 
+            # winnings dont account for bet
+            # change winnings from 2x and maybe losses more every time user goes on
             
             print(f'The current card is a {currentCard}.')
             print('Do you think the next card will be higher or lower? Press e to exit with winnings. (h/l/e)')
