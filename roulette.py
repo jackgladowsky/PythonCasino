@@ -3,198 +3,206 @@ import random
 import numpy as np
 
 
-def roulette():
-    # Declare first iteration of while loop
+class Roulette:
+    def __init__(self, player):
+        self.player = player
 
-    choice = 'y'
+    def playRoulette(self):
+        # Declare first iteration of while loop
 
-    # Welcome user to the game
+        choice = 'y'
 
-    print("Welcome to European Roulette")
-    print('------------------------------')
+        # Welcome user to the game
 
-    # Quick Instructions guide
+        print("Welcome to European Roulette")
+        print('------------------------------')
 
-    print('Individual numbers pay 35:1. They are any number between 0-36')
-    print('Sections of the table are 1-12, 13-24, and 25-36 in the game they are labled as sections 1, 2 & 3 respectively.')
-    print('Sections pay 2:1.')
-    print('Lastly, we have the outside of the board where everything pays 1:1.')
-    print('Your bets can be on red, black, even, odd, all numbers 1-18, or all numbers 19-36')
+        # Quick Instructions guide
 
-    # declare arrays with types of bets
+        print('Individual numbers pay 35:1. They are any number between 0-36')
+        print('Sections of the table are 1-12, 13-24, and 25-36 in the game they are labled as sections 1, 2 & 3 respectively.')
+        print('Sections pay 2:1.')
+        print('Lastly, we have the outside of the board where everything pays 1:1.')
+        print('Your bets can be on red, black, even, odd, all numbers 1-18, or all numbers 19-36')
 
-    numberbets = []
-    thirdbets = []
-    outsidebets = []
+        # declare arrays with types of bets
 
-    # declare sections of thirds of board
+        numberbets = []
+        thirdbets = []
+        outsidebets = []
 
-    firsthird = np.arange(1, 13)
-    secondthird = np.arange(13, 25)
-    thirdthird = np.arange(25, 37)
+        # declare sections of thirds of board
 
-    # declare which numbers are red and black
+        firsthird = np.arange(1, 13)
+        secondthird = np.arange(13, 25)
+        thirdthird = np.arange(25, 37)
 
-    redList = [1, 3, 5, 7, 9, 12, 14, 16, 18,
-               19, 21, 23, 25, 27, 30, 32, 34, 36]
+        # declare which numbers are red and black
 
-    blackList = [2, 4, 6, 8, 10, 11, 13, 15,
-                 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
+        redList = [1, 3, 5, 7, 9, 12, 14, 16, 18,
+                   19, 21, 23, 25, 27, 30, 32, 34, 36]
 
-    # start while loop in case user wants multiple games
+        blackList = [2, 4, 6, 8, 10, 11, 13, 15,
+                     17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
 
-    while choice == "y":
+        # start while loop in case user wants multiple games
 
-        # clear all arrays from previous games
+        while choice == "y":
 
-        numberbets.clear()
-        thirdbets.clear()
-        outsidebets.clear()
+            # clear all arrays from previous games
 
-        # ask user if they would like to bet on individual number
+            numberbets.clear()
+            thirdbets.clear()
+            outsidebets.clear()
 
-        wanttobetnumbers = str(
-            input("Would you like to bet on individual numbers? 36:1 (y/n)\n"))
+            # ask user if they would like to bet on individual number
 
-        # if they do, ask what numbers
+            wanttobetnumbers = str(
+                input("Would you like to bet on individual numbers? 36:1 (y/n)\n"))
 
-        if wanttobetnumbers == 'y':
+            # if they do, ask what numbers
 
-            number_of_numbers = int(
-                input("enter how many numbers you would like to play\n"))
+            if wanttobetnumbers == 'y':
 
-            # enter all the numbers they bet on into a list
+                number_of_numbers = int(
+                    input("enter how many numbers you would like to play\n"))
 
-            for i in range(0, number_of_numbers):
+                # enter all the numbers they bet on into a list
 
-                numberbets.append(int(input("enter your number:\n")))
+                for i in range(0, number_of_numbers):
 
-        # ask user if they would like to bet on a third of the board
+                    numberbets.append(int(input("enter your number:\n")))
 
-        wanttobetthirds = str(
-            input("Would you like to bet on the sections of the board? pay = 2:1 (y/n)\n"))
+            # ask user if they would like to bet on a third of the board
 
-        # if they do, ask what sections
+            wanttobetthirds = str(
+                input("Would you like to bet on the sections of the board? pay = 2:1 (y/n)\n"))
 
-        if wanttobetthirds == 'y':
+            # if they do, ask what sections
 
-            number_of_thirds = int(
-                input("enter how many sections you would like to play (out of 3)\n"))
+            if wanttobetthirds == 'y':
 
-            # enter all sections into a list
+                number_of_thirds = int(
+                    input("enter how many sections you would like to play (out of 3)\n"))
 
-            for i in range(0, number_of_thirds):
+                # enter all sections into a list
 
-                thirdbets.append(int(
-                    input("enter your section(s) (1st 12, 2nd 12, 3rd 12)... enter as 1, 2, 3:\n")))
+                for i in range(0, number_of_thirds):
 
-        # ask user if they would like to bet on outside of the board
+                    thirdbets.append(int(
+                        input("enter your section(s) (1st 12, 2nd 12, 3rd 12)... enter as 1, 2, 3:\n")))
 
-        betnoutside = str(input(
-            "Would you like to bet on whether the number is even, odd, red, black, 1-18, 19-36? pay: 1:1 (y/n)\n"))
+            # ask user if they would like to bet on outside of the board
 
-        # if they do, ask what part of the outside
+            betnoutside = str(input(
+                "Would you like to bet on whether the number is even, odd, red, black, 1-18, 19-36? pay: 1:1 (y/n)\n"))
 
-        if betnoutside == 'y':
+            # if they do, ask what part of the outside
 
-            number_of_outside = int(
-                input("how many outside bets would you like to place? \n"))
+            if betnoutside == 'y':
 
-            # enter all bets into a list
+                number_of_outside = int(
+                    input("how many outside bets would you like to place? \n"))
 
-            for i in range(0, number_of_outside):
+                # enter all bets into a list
 
-                outsidebets.append(
-                    str(input("Input either 'even', 'odd' 'red', 'black', '1-18', '19-36':\n")))
+                for i in range(0, number_of_outside):
 
-        # print the final bets
+                    outsidebets.append(
+                        str(input("Input either 'even', 'odd' 'red', 'black', '1-18', '19-36':\n")))
 
-        print(
-            f"your final bets are {numberbets} on the inside {thirdbets} on the thirds, and {outsidebets} on the outside")
+            # print the final bets
 
-        # simulate the rolling of the ball
+            print(
+                f"your final bets are {numberbets} on the inside {thirdbets} on the thirds, and {outsidebets} on the outside")
 
-        print("Rolling the ball...\n")
+            # simulate the rolling of the ball
 
-        rouletteball = random.randint(0, 36)
+            print("Rolling the ball...\n")
 
-        print(f"The number is....\n {rouletteball}")
+            rouletteball = random.randint(0, 36)
 
-        # declare number win
+            print(f"The number is....\n {rouletteball}")
 
-        if rouletteball in numberbets:
+            # declare number win
 
-            numberWin = True
+            if rouletteball in numberbets:
 
-            print(f"Congradulations you win with your number {rouletteball}")
+                numberWin = True
 
-        # declare win if in one of the sections
+                print(
+                    f"Congradulations you win with your number {rouletteball}")
 
-        elif (rouletteball in range(1, 13)) and (1 in thirdbets):
+            # declare win if in one of the sections
 
-            firsthirdWin = True
+            elif (rouletteball in range(1, 13)) and (1 in thirdbets):
 
-            print(f"Congradulations you win with the number being in the first third")
+                firsthirdWin = True
 
-        elif (rouletteball in range(13, 25)) and (2 in thirdbets):
+                print(
+                    f"Congradulations you win with the number being in the first third")
 
-            secondhirdWin = True
+            elif (rouletteball in range(13, 25)) and (2 in thirdbets):
 
-            print("Congradulations you win with the number being in the second third ")
+                secondhirdWin = True
 
-        elif (rouletteball in range(25, 37)) and (3 in thirdbets):
+                print(
+                    "Congradulations you win with the number being in the second third ")
 
-            thirdthirdWin = True
+            elif (rouletteball in range(25, 37)) and (3 in thirdbets):
 
-            print("Congradulations you win with the number being in the third third ")
+                thirdthirdWin = True
 
-        # declare win if on the outside
+                print(
+                    "Congradulations you win with the number being in the third third ")
 
-        elif (rouletteball % 2 == 0) and ('even' in outsidebets):
+            # declare win if on the outside
 
-            EvenWin = True
+            elif (rouletteball % 2 == 0) and ('even' in outsidebets):
 
-            print("Congradulations you win with the number being even")
+                EvenWin = True
 
-        elif (rouletteball % 2 == 1) and ('odd' in outsidebets):
+                print("Congradulations you win with the number being even")
 
-            oddWin = True
+            elif (rouletteball % 2 == 1) and ('odd' in outsidebets):
 
-            print("Congradulations you win with the number being odd")
+                oddWin = True
 
-        elif (rouletteball in range(1, 19)) and ('1-18' in outsidebets):
+                print("Congradulations you win with the number being odd")
 
-            firsthalfWin = True
+            elif (rouletteball in range(1, 19)) and ('1-18' in outsidebets):
 
-            print("Congradulations you win through the number being 1-18")
+                firsthalfWin = True
 
-        elif (rouletteball in range(19, 37)) and ('19-36' in outsidebets):
+                print("Congradulations you win through the number being 1-18")
 
-            secondhalfWin = True
+            elif (rouletteball in range(19, 37)) and ('19-36' in outsidebets):
 
-            print("Congradulations you win through the number being 19-36")
+                secondhalfWin = True
 
-        elif (rouletteball in blackList) and ('black' in outsidebets):
+                print("Congradulations you win through the number being 19-36")
 
-            BlackWin = True
+            elif (rouletteball in blackList) and ('black' in outsidebets):
 
-            print("Congradulations you win because it landed on black")
+                BlackWin = True
 
-        elif (rouletteball in redList) and ('red' in outsidebets):
+                print("Congradulations you win because it landed on black")
 
-            RedWin = True
+            elif (rouletteball in redList) and ('red' in outsidebets):
 
-            print("Congradulations you win because it landed on red")
+                RedWin = True
 
-        else:
+                print("Congradulations you win because it landed on red")
 
-            print("Sorry, you lose!")
+            else:
 
-        # ask user to play again
+                print("Sorry, you lose!")
 
-        choice = input(
-            "would you like to play again? enter y to continue or anything else to quit\n")
+            # ask user to play again
 
-        if choice == 'y':
+            choice = input(
+                "would you like to play again? enter y to continue or anything else to quit\n")
 
-            print("NEW GAME!!\n\n")
+            if choice == 'y':
+
+                print("NEW GAME!!\n\n")

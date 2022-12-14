@@ -3,7 +3,7 @@ import os
 from hilo import HiLo
 from player import Player
 from blackjack import Blackjack
-from roulette import roulette
+from roulette import Roulette
 
 
 def main():
@@ -18,6 +18,7 @@ def main():
     player = Player(playerName)
     player.writeBalance()
     blackjack = Blackjack(player)
+    roulette = Roulette(player)
     hilo = HiLo(player)
 
     print(f'Welcome {player.name}! Your current balance is {player.balance}.')
@@ -40,17 +41,15 @@ def main():
             print('------------------------------')
             os.system('cls')
             blackjack.playBlackjack()
-            gameLoop = False
         elif playerGameChoice == '2':
             print('You chose Roulette!')
             print('------------------------------')
-            roulette()
+            os.system('cls')
+            roulette.playRoulette()
         elif playerGameChoice == '3':
             print('You chose Hi/Lo!')
             print('------------------------------')
             os.system('cls')
-            print(f'Your current balance is {player.balance}.')
-            print('------------------------------')
             hilo.playHiLo()
         elif playerGameChoice == '4':
             print('Leaving Casino.')
