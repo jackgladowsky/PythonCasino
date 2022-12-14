@@ -21,7 +21,7 @@ def main():
     roulette = Roulette(player)
     hilo = HiLo(player)
 
-    print(f'Welcome {player.name}! Your current balance is {player.balance}.')
+    print(f'Welcome {player.name}! Your starting balance is {player.balance}.')
     print('------------------------------')
 
     gameLoop = True
