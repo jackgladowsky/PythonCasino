@@ -5,8 +5,7 @@ class HiLo:
     def __init__(self, player):
         self.player = player
         self.suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
-        self.values = {'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5, 'Six': 6, 'Seven': 7,
-                       'Eight': 8, 'Nine': 9, 'Ten': 10, 'Jack': 11, 'Queen': 12, 'King': 13, 'Ace': 14}
+        self.values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
         self.deck = Deck(self.values, self.suits)
 
     def playHiLo(self):
@@ -51,7 +50,7 @@ class HiLo:
                 self.player.writeBalance()
                 gameLoop = False
             elif userChoice == 'h':
-                if self.values[currentCard[0]] > self.values[nextCard[0]]:
+                if currentCard[0] > nextCard[0]:
                     print(
                         f'Wrong. The next card was a {nextCard[0]} of {nextCard[1]}.')
                     print(f'You lost {USERBET}.')
@@ -67,7 +66,7 @@ class HiLo:
                     print(f'Your current winnings are {userWinnings}.')
                     print('------------------------------')
             elif userChoice == 'l':
-                if self.values[currentCard[0]] > self.values[nextCard[0]]:
+                if currentCard[0] > nextCard[0]:
                     print(
                         f'Correct. The next card was a {nextCard[0]} of {nextCard[1]}.')
                     userWinnings += userBet
