@@ -29,6 +29,9 @@ class HiLo:
         # check to make sure user can cover bet
         try:
             userBet = int(input('Enter bet: '))
+            if userBet > self.player.balance:
+                print('You cant bet more than you have in your balance.')
+                userBet = int(input('Enter bet: '))
         except ValueError:
             print('Please input a valid bet!')
             userBet = int(input('Enter bet: '))

@@ -70,6 +70,7 @@ class Blackjack:
                 print(
                     f'Your new card is a {playerCards[playerHitCount+1][0]} of {playerCards[playerHitCount+1][1]}.')
                 print(f'You now have {playerValue}.')
+                print('------------------------------')
                 if playerValue == 21:
                     userHandChoice = 's'
                 elif playerValue > 21:

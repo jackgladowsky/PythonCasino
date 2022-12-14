@@ -27,6 +27,12 @@ def main():
     gameLoop = True
 
     while gameLoop:
+        if player.checkBalance() == False:
+            print('Your out of money! Better luck next time!')
+            print('------------------------------')
+            gameLoop = False
+            break
+
         print(
             'Please choose from the available games below or type b to view your balance:')
         print('1. Blackjack')
