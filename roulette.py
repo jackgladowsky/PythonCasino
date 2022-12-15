@@ -78,7 +78,15 @@ class Roulette:
 
                     numberbets.append(int(input("enter your number:\n")))
 
-                    bet = int(input('Enter your bet for this number: '))
+                    try:
+                        bet = int(input('Enter bet: '))
+                        if bet > self.player.balance:
+                            print('You cant bet more than you have in your balance.')
+                            bet = int(input('Enter bet: '))
+                    except ValueError:
+                        print('Please input a valid bet!')
+                        bet = int(input('Enter bet: '))
+                    print('------------------------------')
                     userBetNum.append(bet)
                     self.player.balance -= bet
 
@@ -98,9 +106,15 @@ class Roulette:
 
                 for i in range(0, number_of_thirds):
 
-                    thirdbets.append(int(
-                        input("enter your section(s) (1st 12, 2nd 12, 3rd 12)... enter as 1, 2, 3:\n")))
-                    bet = int(input('Enter your bet for this number: '))
+                    try:
+                        bet = int(input('Enter bet: '))
+                        if bet > self.player.balance:
+                            print('You cant bet more than you have in your balance.')
+                            bet = int(input('Enter bet: '))
+                    except ValueError:
+                        print('Please input a valid bet!')
+                        bet = int(input('Enter bet: '))
+                    print('------------------------------')
                     userBetThird.append(bet)
                     self.player.balance -= bet
 
@@ -122,7 +136,15 @@ class Roulette:
 
                     outsidebets.append(
                         str(input("Input either 'even', 'odd' 'red', 'black', '1-18', '19-36':\n")))
-                    bet = int(input('Enter your bet for this number: '))
+                    try:
+                        bet = int(input('Enter bet: '))
+                        if bet > self.player.balance:
+                            print('You cant bet more than you have in your balance.')
+                            bet = int(input('Enter bet: '))
+                    except ValueError:
+                        print('Please input a valid bet!')
+                        bet = int(input('Enter bet: '))
+                    print('------------------------------')
                     userBetOut.append(bet)
                     self.player.balance -= bet
 
@@ -135,8 +157,8 @@ class Roulette:
 
             print("Rolling the ball...\n")
 
-            #rouletteball = random.randint(0, 36)
-            rouletteball = 3
+            rouletteball = random.randint(0, 36)
+            #rouletteball = 3
 
             print(f"The number is....\n {rouletteball}")
 
