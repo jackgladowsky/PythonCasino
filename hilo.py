@@ -42,7 +42,7 @@ class HiLo:
 
         while gameLoop:
             print(
-                f'The current card is a {currentCard[0]} of {currentCard[1]}.')
+                f'The current card is a {currentCard[2]} of {currentCard[1]}.')
             print(
                 'Do you think the next card will be higher or lower? Press e to exit with winnings. (h/l/e)')
             userChoice = input('Enter here: ')
@@ -55,7 +55,7 @@ class HiLo:
             elif userChoice == 'h':
                 if currentCard[0] > nextCard[0]:
                     print(
-                        f'Wrong. The next card was a {nextCard[0]} of {nextCard[1]}.')
+                        f'Wrong. The next card was a {nextCard[2]} of {nextCard[1]}.')
                     print(f'You lost {USERBET}.')
                     print('------------------------------')
                     self.player.balance -= USERBET
@@ -63,7 +63,7 @@ class HiLo:
                     gameLoop = False
                 else:
                     print(
-                        f'Correct. The next card was a {nextCard[0]} of {nextCard[1]}.')
+                        f'Correct. The next card was a {nextCard[2]} of {nextCard[1]}.')
                     userWinnings += userBet
                     userBet += userBet
                     print(f'Your current winnings are {userWinnings}.')
@@ -71,14 +71,14 @@ class HiLo:
             elif userChoice == 'l':
                 if currentCard[0] > nextCard[0]:
                     print(
-                        f'Correct. The next card was a {nextCard[0]} of {nextCard[1]}.')
+                        f'Correct. The next card was a {nextCard[2]} of {nextCard[1]}.')
                     userWinnings += userBet
                     userBet += userBet
                     print(f'Your current winnings are {userWinnings}.')
                     print('------------------------------')
                 else:
                     print(
-                        f'Wrong. The next card was a {nextCard[0]} of {nextCard[1]}.')
+                        f'Wrong. The next card was a {nextCard[2]} of {nextCard[1]}.')
                     print(f'You lost {USERBET}.')
                     print('------------------------------')
                     self.player.balance -= USERBET

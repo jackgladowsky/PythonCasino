@@ -1,4 +1,5 @@
 import os
+import time
 
 from hilo import HiLo
 from player import Player
@@ -47,16 +48,22 @@ def main():
             print('------------------------------')
             os.system('cls')
             blackjack.playBlackjack()
+            time.sleep(3)
+            os.system('cls')
         elif playerGameChoice == '2':
             print('You chose Roulette!')
             print('------------------------------')
             os.system('cls')
             roulette.playRoulette()
+            time.sleep(3)
+            os.system('cls')
         elif playerGameChoice == '3':
             print('You chose Hi/Lo!')
             print('------------------------------')
             os.system('cls')
             hilo.playHiLo()
+            time.sleep(3)
+            os.system('cls')
         elif playerGameChoice == '4':
             print('Leaving Casino.')
             print('------------------------------')

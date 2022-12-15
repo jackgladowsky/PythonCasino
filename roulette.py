@@ -48,6 +48,11 @@ class Roulette:
         # start while loop in case user wants multiple games
 
         while choice == "y":
+            userBetNum = []
+            userBetThird = []
+            userBetOut = []
+
+            userWinnings = 0
 
             # clear all arrays from previous games
 
@@ -73,6 +78,10 @@ class Roulette:
 
                     numberbets.append(int(input("enter your number:\n")))
 
+                    bet = int(input('Enter your bet for this number: '))
+                    userBetNum.append(bet)
+                    self.player.balance -= bet
+
             # ask user if they would like to bet on a third of the board
 
             wanttobetthirds = str(
@@ -91,6 +100,9 @@ class Roulette:
 
                     thirdbets.append(int(
                         input("enter your section(s) (1st 12, 2nd 12, 3rd 12)... enter as 1, 2, 3:\n")))
+                    bet = int(input('Enter your bet for this number: '))
+                    userBetThird.append(bet)
+                    self.player.balance -= bet
 
             # ask user if they would like to bet on outside of the board
 
@@ -110,6 +122,9 @@ class Roulette:
 
                     outsidebets.append(
                         str(input("Input either 'even', 'odd' 'red', 'black', '1-18', '19-36':\n")))
+                    bet = int(input('Enter your bet for this number: '))
+                    userBetOut.append(bet)
+                    self.player.balance -= bet
 
             # print the final bets
 
@@ -120,7 +135,8 @@ class Roulette:
 
             print("Rolling the ball...\n")
 
-            rouletteball = random.randint(0, 36)
+            #rouletteball = random.randint(0, 36)
+            rouletteball = 3
 
             print(f"The number is....\n {rouletteball}")
 
@@ -129,76 +145,125 @@ class Roulette:
             if rouletteball in numberbets:
 
                 numberWin = True
+                userWinnings += userBetNum[numberbets.index(rouletteball)] * 35
 
                 print(
-                    f"Congradulations you win with your number {rouletteball}")
+                    f"Congradulations you win with your number {rouletteball}.")
+                print(
+                    f'You won {userBetNum[numberbets.index(rouletteball)] * 35}')
 
             # declare win if in one of the sections
 
             elif (rouletteball in range(1, 13)) and (1 in thirdbets):
 
                 firsthirdWin = True
+                userWinnings += userBetThird[thirdbets.index('1')] * 2
 
                 print(
                     f"Congradulations you win with the number being in the first third")
+                print(
+                    f'You won {userBetThird[thirdbets.index(str(1))]*2}.')
 
             elif (rouletteball in range(13, 25)) and (2 in thirdbets):
 
                 secondhirdWin = True
+                userWinnings += userBetThird[thirdbets.index(
+                    '2')] * 2
 
                 print(
                     "Congradulations you win with the number being in the second third ")
+                print(
+                    f'You won {userBetThird[thirdbets.index(str(2))]*2}.')
 
             elif (rouletteball in range(25, 37)) and (3 in thirdbets):
 
                 thirdthirdWin = True
+                userWinnings += userBetThird[thirdbets.index(
+                    '3')] * 2
 
                 print(
                     "Congradulations you win with the number being in the third third ")
+                print(
+                    f'You won {userBetThird[thirdbets.index(str(3))]*2}.')
 
             # declare win if on the outside
 
             elif (rouletteball % 2 == 0) and ('even' in outsidebets):
 
                 EvenWin = True
+                userWinnings += userBetOut[outsidebets.index(
+                    'even')]
+                win = userBetOut[outsidebets.index('even')]
 
                 print("Congradulations you win with the number being even")
+                print(
+                    f'You won {win}.')
 
             elif (rouletteball % 2 == 1) and ('odd' in outsidebets):
 
                 oddWin = True
+                userWinnings += userBetOut[outsidebets.index(
+                    'odd')]
+
+                win = userBetOut[outsidebets.index('odd')]
 
                 print("Congradulations you win with the number being odd")
+                print(
+                    f'You won {win}.')
 
             elif (rouletteball in range(1, 19)) and ('1-18' in outsidebets):
 
                 firsthalfWin = True
+                userWinnings += userBetOut[outsidebets.index(
+                    '1-18')]
+                win = userBetOut[outsidebets.index(
+                    '1-18')]
 
                 print("Congradulations you win through the number being 1-18")
+                print(f'You won {win}.')
 
             elif (rouletteball in range(19, 37)) and ('19-36' in outsidebets):
 
                 secondhalfWin = True
+                userWinnings += userBetOut[outsidebets.index(
+                    '19-36')]
+                win = userBetOut[outsidebets.index(
+                    '19-36')]
 
                 print("Congradulations you win through the number being 19-36")
+                print(f'You won {win}.')
 
             elif (rouletteball in blackList) and ('black' in outsidebets):
 
                 BlackWin = True
+                userWinnings += userBetOut[outsidebets.index(
+                    'black')]
+                win = userBetOut[outsidebets.index(
+                    'black')]
 
                 print("Congradulations you win because it landed on black")
+                print(f'You won {win}.')
 
             elif (rouletteball in redList) and ('red' in outsidebets):
 
                 RedWin = True
+                userWinnings += userBetOut[outsidebets.index(
+                    'red')]
+                win = userBetOut[outsidebets.index(
+                    'red')]
 
                 print("Congradulations you win because it landed on red")
+                print(f'You won {win}.')
 
             else:
 
                 print("Sorry, you lose!")
+                print(f'Your balance is now {self.player.balance}.')
 
             # ask user to play again
+
+            self.player.balance += userWinnings
+            self.player.writeBalance()
 
             choice = input(
                 "would you like to play again? enter y to continue or anything else to quit\n")

@@ -3,12 +3,17 @@ import random
 
 class Deck:
     def __init__(self, values, suits):
+        count = 0
+
         self.values = values
         self.suits = suits
         self.deck = []
+        self.names = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven',
+                      'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+
         for suit in self.suits:
-            for value in self.values:
-                self.deck.append((value, suit))
+            for i in range(len(self.values)):
+                self.deck.append((self.values[i], suit, self.names[i]))
 
     def shuffle(self):
         random.shuffle(self.deck)
