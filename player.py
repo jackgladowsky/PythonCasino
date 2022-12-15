@@ -1,3 +1,7 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
 class Player:
     writeCount = 0
 
@@ -27,3 +31,21 @@ class Player:
                 file.write(str(self._balance))
                 file.write('\n')
         self.writeCount += 1
+
+    def drawBalance(self):
+        with open('balance.txt', 'r') as file:
+            # Read all the lines from the file
+            nums = file.readlines()
+
+        # Split each line on the newline character
+        balanceArrayOld = [num.split('\n') for num in nums]
+        balanceArrayNew = []
+        for array in range(len(balanceArrayOld)):
+            balanceArrayOld[array].remove('')
+            for num in balanceArrayOld[array]:
+                balanceArrayNew.append(int(num))
+
+        plt.plot(range(len(balanceArrayNew)), balanceArrayNew)
+        plt.xticks(np.arange(0, len(balanceArrayNew), 1))
+        plt.yticks(np.arange(min(balanceArrayNew), max(balanceArrayNew), 25))
+        plt.show()

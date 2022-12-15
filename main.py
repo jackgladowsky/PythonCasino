@@ -39,7 +39,8 @@ def main():
         print('1. Blackjack')
         print('2. Roulette')
         print('3. Hi/Lo')
-        print('4. Exit Casino')
+        print('4. Show Balance Graph')
+        print('5. Exit Casino')
         playerGameChoice = input('Enter choice here: ')
         print('------------------------------')
 
@@ -65,6 +66,10 @@ def main():
             time.sleep(3)
             os.system('cls')
         elif playerGameChoice == '4':
+            print(f'Showing {player.name}s balance graph...')
+            print('------------------------------')
+            player.drawBalance()
+        elif playerGameChoice == '5':
             print('Leaving Casino.')
             print('------------------------------')
             gameLoop = False

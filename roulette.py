@@ -106,6 +106,8 @@ class Roulette:
 
                 for i in range(0, number_of_thirds):
 
+                    thirdbets.append(int(input("enter your number:\n")))
+
                     try:
                         bet = int(input('Enter bet: '))
                         if bet > self.player.balance:
