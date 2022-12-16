@@ -280,13 +280,12 @@ class Roulette:
                 print(f'You won {win}.')
 
             else:
-
                 print("Sorry, you lose!")
-                print(f'Your balance is now {self.player.balance}.')
 
             # ask user to play again
 
             self.player.balance += userWinnings
+            print(f'Your balance is now {self.player.balance}.')
             self.player.writeBalance()
 
             choice = input(

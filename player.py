@@ -46,6 +46,9 @@ class Player:
                 balanceArrayNew.append(int(num))
 
         plt.plot(range(len(balanceArrayNew)), balanceArrayNew)
+        plt.xlabel('Bets Made')
+        plt.ylabel('Balance')
+        plt.title('Balance vs Amount of Bets')
         plt.xticks(np.arange(0, len(balanceArrayNew), 1))
         plt.yticks(np.arange(min(balanceArrayNew), max(balanceArrayNew), 25))
         plt.show()
